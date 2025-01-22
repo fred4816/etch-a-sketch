@@ -45,7 +45,26 @@ function addHoverEffect() {
 
     grid_squares.forEach((square) => {
         square.addEventListener('mouseover', () => {
-            square.style.backgroundColor = 'red';
+            if (!square.style.backgroundColor) {
+                square.style.backgroundColor = getRandomRGBColor();
+                square.style.opacity = 0.1;
+            }
+            console.log(`opacity is: ${square.style.opacity}`);
+            console.log(`opacity should be: ${parseFloat(square.style.opacity) + 0.1}`);
+
+            if (parseFloat(square.style.opacity) < 1) {
+                square.style.opacity = parseFloat(square.style.opacity) + 0.1;
+            }
         });
     });
+}
+
+
+// FUNCTION TO GET RANDOM RGB COLOUR
+function getRandomRGBColor() {
+    let red = Math.floor(Math.random() * 256);
+    let green = Math.floor(Math.random() * 256); 
+    let blue = Math.floor(Math.random() * 256);
+
+    return `rgb(${red}, ${green}, ${blue})`;
 }
